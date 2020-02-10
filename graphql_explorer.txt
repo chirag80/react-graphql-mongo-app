@@ -1,0 +1,130 @@
+# Write your query or mutation here
+query getPosts{
+  getPosts{
+    id
+    body
+    createdAt
+    username
+    likeCount
+    commentCount
+    comments{
+      id
+      username
+      body
+    }
+    likes{
+      id
+      username
+    }
+  }
+}
+
+query getPost{
+   getPost(postId:"5e41967b1fc2ae683c6b202b"){
+    id
+    body
+    createdAt
+    username
+    comments{
+      id
+      username
+      body
+    }
+     likes{
+      id
+      username
+    }
+  }
+}
+
+mutation comment{
+  createComment(postId:"5e41967b1fc2ae683c6b202b" body:"new comment on only post"){
+  id
+  body
+  comments{
+    id
+    createdAt
+    username
+    body
+  }
+  }
+}
+
+===================
+mutation{
+  register(registerInput:{
+    username:"chiragp"
+    password:"123456"
+    confirmPassword:"123456"
+    email:"userp@email.com"
+  }){
+    id
+    email
+    token
+    username
+    createdAt
+  }
+}
+
+=========
+mutation{
+  login(username:"chiragp",password:"123456"){
+    id
+    email
+    token
+    username
+    createdAt
+  }
+}
+==============
+mutation createPost{
+  createPost(body:"post for subscriber 2"){
+    id
+    body
+    createdAt
+    username
+  }
+}
+
+mutation deletePost{
+  deletePost(postId:"5e416978b461a7b332cbc86c")
+}
+============
+mutation{
+  deleteComment(postId:"5e41967b1fc2ae683c6b202b" commentId:"5e41e34b0236904c34b686f4")
+{
+  id
+  comments{
+    id
+    username
+    body
+  }
+}
+}
+==============
+mutation{
+  likePost(postId:"5e41967b1fc2ae683c6b202b"){
+    id
+    body
+    username
+    likes{
+      id
+      username
+    }
+  }
+}
+==========
+subscription{
+  newPost{
+    id
+    body
+    createdAt
+    username
+    comments{
+      createdAt
+    }
+    likes{
+      createdAt
+    }
+  }
+}
